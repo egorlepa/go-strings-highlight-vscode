@@ -1,4 +1,4 @@
-# go-strings-highlighting
+# go strings highlight
 
 
 ## Features
@@ -14,13 +14,4 @@
 
 
 ## Release Notes
-
-
 ### 1.0.0
-
-
-### 1.0.1
-
-
-### 1.1.0
-

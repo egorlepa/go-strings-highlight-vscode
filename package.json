@@ -1,11 +1,11 @@
 {
-  "name": "go-strings-highlighting",
-  "displayName": "Go Strings Highlighting",
+  "name": "go-strings-highlight",
+  "displayName": "Go Strings Highlight",
   "description": "",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/egorlepa/dark-revenant-theme-vscode.git"
+    "url": "git+https://github.com/egorlepa/go-strings-highlight-vscode.git"
   },
   "engines": {
     "vscode": "^1.96.0"

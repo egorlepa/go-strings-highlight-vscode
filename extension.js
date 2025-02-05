@@ -70,7 +70,7 @@ function updateDecorations(editor) {
 /** 
  * @param {{ range: vscode.Range; text: string; isRaw: boolean; }} str
  */
-function decorateStrings(str) { // todo: write quality parser
+function decorateStrings(str) {
     const decorations = [];
     let match;
 
@@ -105,8 +105,8 @@ function decorateStrings(str) { // todo: write quality parser
     return decorations
 }
 
-// todo dirty checking, diff processing
-function activate(context) {
+
+function activate(context) { 
     updateDecorations(vscode.window.activeTextEditor)
 
     vscode.window.onDidChangeActiveTextEditor(editor => {
@@ -126,3 +126,7 @@ function activate(context) {
 function deactivate() { }
 
 module.exports = { activate, deactivate };
+
+// todo dirty checking, diff processing
+// todo: color settings
+// todo: write quality parser
