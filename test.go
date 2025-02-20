@@ -2,8 +2,11 @@ package main
 
 // should ignore comments
 // %b, %d, %o, %x %X
+// "%b, %d, %o, %x %X"
 // \a, \b, \\, \t, \n, \f, \r, \v
-func main() {
+// "\a, \b, \\, \t, \n, \f, \r, \v"
+// `\a, \b, \\, \t, \n, \f, \r, \v`
+func mai2n() {
 	char := '\n'
 	char = '\U0001F600'
 	_ = char

@@ -1,23 +1,48 @@
 {
   "name": "go-strings-highlight",
-  "displayName": "Go Strings Highlight",
-  "description": "",
+  "displayName": "Gokit: Go Strings Highlight",
+  "description": "Highlights placeholders and escape sequences in go string literals.",
   "version": "1.0.0",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/egorlepa/go-strings-highlight-vscode.git"
+    "url": "https://github.com/egorlepa/go-strings-highlight-vscode.git"
   },
   "engines": {
     "vscode": "^1.96.0"
   },
   "categories": [
-    "Other"
+    "Programming Languages"
   ],
   "activationEvents": [
-    "onLanguage:go"
+    "workspaceContains:**/*.go"
   ],
   "main": "./extension.js",
   "contributes": {
+    "configuration": {
+      "title": "Go Strings Highlight",
+      "properties": {
+        "go-strings-highlight.colors": {
+          "type": "object",
+          "default": {
+            "escapeSequenceColor": "#71bbd2",
+            "placeholderColor": "#71bbd2"
+          },
+          "description": "Colors for highlighting Go string elements.",
+          "properties": {
+            "escapeSequenceColor": {
+              "type": "string",
+              "description": "Color for escape sequences.",
+              "format": "color"
+            },
+            "placeholderColor": {
+              "type": "string",
+              "description": "Color for placeholders.",
+              "format": "color"
+            }
+          }
+        }
+      }
+    }
   },
   "scripts": {
     "lint": "eslint .",
