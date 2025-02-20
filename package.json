@@ -3,6 +3,7 @@
   "displayName": "Gokit: Go Strings Highlight",
   "description": "Highlights placeholders and escape sequences in go string literals.",
   "version": "1.0.0",
+  "publisher": "egorlepa",
   "repository": {
     "type": "git",
     "url": "https://github.com/egorlepa/go-strings-highlight-vscode.git"
