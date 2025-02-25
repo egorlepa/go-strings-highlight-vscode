@@ -13,9 +13,18 @@ All notable changes to the "golang-additional-semantics" extension will be docum
 ### Fixed
 
 - Fixed false triggering inside // comments
-```
-    // "%v"
-```
+
+### Changed
+
+### Removed
+
+## [1.0.2]
+
+### Added
+
+### Fixed
+
+- Fixed false triggering inside /* block comments */
 
 ### Changed
 
