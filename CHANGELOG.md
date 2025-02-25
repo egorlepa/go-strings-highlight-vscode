@@ -29,3 +29,15 @@ All notable changes to the "golang-additional-semantics" extension will be docum
 ### Changed
 
 ### Removed
+
+## [1.0.3]
+
+### Added
+
+### Fixed
+
+- Fixed changelog
+
+### Changed
+
+### Removed
