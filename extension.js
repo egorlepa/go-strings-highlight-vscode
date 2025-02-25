@@ -36,6 +36,7 @@ function updateDecorations(editor) {
 
 }
 
+/* bug: works inside comments "%v" */
 /**
  * @param {vscode.TextEditor} editor
  */
@@ -52,13 +53,14 @@ function findStringLiterals(editor) {
 
     for (let ln = 0; ln < lines.length; ln++) {
         const line = lines[ln];
-        if (line.startsWith('//')) {
+        if (line.trimStart().startsWith('//')) {
             continue;
         }
 
         for (let col = 0; col < line.length; col++) {
             const char = line[col];
             switch (char) {
+                case "\\":
                 case "'":
                     if (!isInsideChar && !isInsideString && !isInsideRawString) {
                         isInsideChar = true;
@@ -137,6 +139,9 @@ function findDecorationRanges(str) {
 
 const debounceThrottleInterval = 200;
 
+/**
+ * @param {vscode.ExtensionContext} context
+ */
 function activate(context) {
     const activeEditor = vscode.window.activeTextEditor
     if (activeEditor && activeEditor.document.languageId === 'go') {

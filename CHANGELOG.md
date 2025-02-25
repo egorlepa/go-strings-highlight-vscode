@@ -2,8 +2,21 @@
 
 All notable changes to the "golang-additional-semantics" extension will be documented in this file.
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
-
-## [Unreleased]
+## [1.0.0]
 
 - Initial release
+
+## [1.0.1]
+
+### Added
+
+### Fixed
+
+- Fixed false triggering inside // comments
+```
+    // "%v"
+```
+
+### Changed
+
+### Removed
