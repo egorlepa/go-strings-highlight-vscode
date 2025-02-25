@@ -20,24 +20,18 @@ All notable changes to the "golang-additional-semantics" extension will be docum
 
 ## [1.0.2]
 
-### Added
-
 ### Fixed
 
 - Fixed false triggering inside /* block comments */
 
-### Changed
-
-### Removed
-
 ## [1.0.3]
-
-### Added
 
 ### Fixed
 
 - Fixed changelog
 
-### Changed
+## [1.0.4]
 
-### Removed
+### Fixed
+
+- Fixed readme
