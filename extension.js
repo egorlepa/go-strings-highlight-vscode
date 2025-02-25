@@ -36,7 +36,6 @@ function updateDecorations(editor) {
 
 }
 
-/* bug: works inside comments "%v" */
 /**
  * @param {vscode.TextEditor} editor
  */
@@ -48,19 +47,34 @@ function findStringLiterals(editor) {
     let isInsideChar = false;
     let isInsideString = false;
     let isInsideRawString = false;
+    let isInsideBlockComment = false;
 
     const strings = [];
 
     for (let ln = 0; ln < lines.length; ln++) {
         const line = lines[ln];
-        if (line.trimStart().startsWith('//')) {
-            continue;
-        }
+        let col = 0;
 
-        for (let col = 0; col < line.length; col++) {
+        while (col < line.length) {
+            if (isInsideBlockComment) {
+                if (line.startsWith('*/', col)) {
+                    isInsideBlockComment = false;
+                    col += 2;
+                } else {
+                    col++;
+                }
+                continue;
+            }
+
+            if (line.startsWith('//', col)) break;
+            if (line.startsWith('/*', col)) {
+                isInsideBlockComment = true;
+                col += 2;
+                continue;
+            }
+
             const char = line[col];
             switch (char) {
-                case "\\":
                 case "'":
                     if (!isInsideChar && !isInsideString && !isInsideRawString) {
                         isInsideChar = true;
@@ -68,7 +82,7 @@ function findStringLiterals(editor) {
                     } else if (isInsideChar) {
                         isInsideChar = false;
                         const range = new vscode.Range(strStartPos, new vscode.Position(ln, col));
-                        strings.push({ range: range, text: editor.document.getText(range), isRaw: false, });
+                        strings.push({ range, text: editor.document.getText(range), isRaw: false });
                     }
                     break;
                 case '"':
@@ -78,20 +92,21 @@ function findStringLiterals(editor) {
                     } else if (isInsideString && line[col - 1] !== '\\') {
                         isInsideString = false;
                         const range = new vscode.Range(strStartPos, new vscode.Position(ln, col));
-                        strings.push({ range: range, text: editor.document.getText(range), isRaw: false, });
+                        strings.push({ range, text: editor.document.getText(range), isRaw: false });
                     }
                     break;
                 case '`':
                     if (!isInsideChar && !isInsideString && !isInsideRawString) {
                         isInsideRawString = true;
-                        strStartPos = new vscode.Position(ln, col + 1)
+                        strStartPos = new vscode.Position(ln, col + 1);
                     } else if (isInsideRawString) {
                         isInsideRawString = false;
                         const range = new vscode.Range(strStartPos, new vscode.Position(ln, col));
-                        strings.push({ range: range, text: editor.document.getText(range), isRaw: true, });
+                        strings.push({ range, text: editor.document.getText(range), isRaw: true });
                     }
                     break;
             }
+            col++;
         }
     }
 
