@@ -32,3 +32,8 @@
 ## [1.0.6]
 
 - More robust string literals detection
+
+## [1.0.7]
+
+### Fixed
+- Fixed awaiting on error message

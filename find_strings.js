@@ -1,5 +1,29 @@
 const vscode = require('vscode');
 
+const CHANNEL = vscode.window.createOutputChannel('Go Strings Highlight');
+const _notifiedDocs = new Set();
+
+/** Non-blocking popup + OutputChannel details (shown once per doc). */
+function notifySemanticTokensIssue(doc, errMsg) {
+  const key = doc.uri.toString();
+  if (!_notifiedDocs.has(key)) {
+    _notifiedDocs.add(key);
+    // Non-blocking (no await) so your flow continues
+    void vscode.window.showErrorMessage(
+      'Go strings: could not obtain semantic tokens. Open details?',
+      'Open Output'
+    ).then(choice => {
+      if (choice === 'Open Output') CHANNEL.show(true);
+    });
+  }
+
+  CHANNEL.clear();
+  CHANNEL.appendLine('Could not obtain semantic tokens for strings.');
+  CHANNEL.appendLine(`File: ${doc.fileName}`);
+  CHANNEL.appendLine(`Language: ${doc.languageId}`);
+  CHANNEL.appendLine('');
+  CHANNEL.appendLine(String(errMsg || 'Unknown error'));
+}
 
 async function findStringLiterals(editor) {
   if (!editor) throw new Error('No active editor.');
@@ -23,10 +47,7 @@ async function findStringLiterals(editor) {
       }));
     }
   } catch (err) {
-    // ⛔️ Show popup with details and stop
-    await vscode.window.showErrorMessage(
-      `Could not obtain semantic tokens for strings: ${err && err.message ? err.message : String(err)}`
-    );
+    notifySemanticTokensIssue(doc, err && err.message ? err.message : err);
     return [];
   }
 
