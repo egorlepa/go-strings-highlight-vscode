@@ -28,3 +28,7 @@
 
 ### Fixed
 - Fixed readme
+
+## [1.0.6]
+
+- More robust string literals detection
